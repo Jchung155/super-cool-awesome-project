@@ -44,17 +44,12 @@ public class BulletScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
     
-        if (other.gameObject.CompareTag("Sword"))
+        if (other.gameObject.CompareTag("Bat"))
         {
             xspeed *=-1;
             yspeed *=-1;
-            transform.gameObject.tag = "Sword";
+            transform.gameObject.tag = "Redirected";
         }
 
-        if (other.gameObject.CompareTag("Portal") /*&& player.GetComponent(portalTimer) == 2*/)
-        {
-            transform.position = GameObject.Find("ExitPortal").transform.position;
-            transform.gameObject.tag = "Sword";
-        }
     }
 }

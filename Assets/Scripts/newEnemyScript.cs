@@ -93,8 +93,9 @@ public class newEnemyScript : MonoBehaviour
     
        if (other.gameObject.CompareTag("Bat"))
          {
-            Destroy(gameObject);
-         }
+            other.gameObject.getComponent<
+            RB.linearVelocity = new Vector2(Random.Range(1.0f, 3.0f) * sign, Random.Range(3.0f, 5.0f));
+        }
 
         if (other.gameObject.CompareTag("Ball") )
         {
