@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class newEnemyScript : MonoBehaviour
+public class newEnemyScript1 : MonoBehaviour
 {
     // Start is called before the first frame update
 
@@ -38,7 +38,7 @@ public class newEnemyScript : MonoBehaviour
         
         if (attack == false && !dead)
         {
-            
+            speed = 1.5f;
             RB.linearVelocity = new Vector2(speed, RB.linearVelocity.y);
 
             if (Time.time >= turnTime)
@@ -60,16 +60,9 @@ public class newEnemyScript : MonoBehaviour
         }
         else
         {
-            if (Time.time >= lastShotTime)
-            {
-                //add the current time to the button delay
-                lastShotTime = Time.time + shotDelay;
-
-                //This line of code actually spawns the object. Ignore 'Quaternion.identity' for now
-                Instantiate(bullet, transform.position, Quaternion.identity);
-
-            }
-
+            if (player.transform.position.x < transform.position.x) speed = -4.5f;
+            else speed = 4.5f;
+            RB.linearVelocity = new Vector2(speed, RB.linearVelocity.y);
         }
 
         //attack mode

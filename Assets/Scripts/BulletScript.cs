@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.XR;
 
 public class BulletScript : MonoBehaviour
 {
     public float yspeed;
-    public float xspeed=4;
+    public float speed=5;
     public float range = 3;
     public Rigidbody2D RB;
     public GameObject player;
     public float bulletDelay = 2;
+    public bool hit;
 
     public float bulletTime;
     // Start is called before the first frame update
@@ -18,13 +20,11 @@ public class BulletScript : MonoBehaviour
     {
         bulletTime = Time.time;
         player = GameObject.Find("Player");
-        yspeed = Random.Range(-range, range)/20;
-        if (player.transform.position.x < transform.position.x)
-        {
-            xspeed *= -1;
-        }
         
+        RB.linearVelocity = (player.transform.position - transform.position).normalized * speed;
+
         Debug.Log(player.transform.position.x);
+        hit = false;
     
     }
 
@@ -33,7 +33,8 @@ public class BulletScript : MonoBehaviour
     {
         //    transform.position = new Vector3(transform.position.x + xspeed, transform.position.y + yspeed, 0);
 
-        RB.linearVelocity = new Vector2(xspeed, yspeed);
+        //RB.linearVelocity = new Vector2(xspeed, yspeed);
+        
 
         if (Time.time > bulletTime + bulletDelay)
         {
@@ -43,12 +44,14 @@ public class BulletScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-    
-        if (other.gameObject.CompareTag("Bat"))
+
+        if (other.gameObject.CompareTag("Bat") && hit == false)
         {
-            xspeed *=-2;
-            yspeed *=-2;
+            RB.linearVelocity *= -1;
             transform.gameObject.tag = "Ricochet";
+            hit = true;
+            SpriteRenderer m_SpriteRenderer = GetComponent<SpriteRenderer>();
+            m_SpriteRenderer.color = Color.blue;
         }
 
     }

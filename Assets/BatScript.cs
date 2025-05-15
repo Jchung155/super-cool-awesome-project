@@ -40,7 +40,7 @@ public class BatScript : MonoBehaviour
         }
         else {
         gameObject.GetComponent<Renderer>().enabled = false;
-        gameObject.GetComponent<BoxCollider2D>().enabled = true;
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
         }
 
         lastSwingTime-=Time.deltaTime;
@@ -55,7 +55,7 @@ public class BatScript : MonoBehaviour
     public void Swing(float force)
     {
        swinging = true;
-       lastSwingTime = 1;
+       lastSwingTime = 0.15f;
        swingForce = force;
 
     }

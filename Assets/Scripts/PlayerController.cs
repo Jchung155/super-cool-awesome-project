@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public int health;
     public BatScript bat;
     public bool rageMode;
+    public SpriteRenderer spriteRenderer;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -55,27 +56,61 @@ public class PlayerController : MonoBehaviour
                 vel.y = jumpSpeed;
             }
 
-            if (Input.GetKey(KeyCode.A) && bat.lastSwingTime <= 0 && charge <= maxCharge) { 
-        
-            charge++;
-            if(rageMode) charge += 3;
-                
-            } 
-            
-            else if(charge > 40){
-            bat.Swing(charge);
-            charge = 0;
+            if (Input.GetKey(KeyCode.A) && bat.lastSwingTime <= 0)
+            {
+                if (charge <= maxCharge)
+                {
+                    charge++;
+                    if (rageMode) charge += 3;
+                }
             }
-        
 
-        RB.linearVelocity = vel;
+            else if (charge > 30)
+            {
+                bat.Swing(charge);
+                charge = 0;
+            }
+            else charge = 0;
+
+            if (Input.GetKey(KeyCode.S) && rage >= 0.5f)
+            {
+                rageMode = true;
+            }
+
+
+            RB.linearVelocity = vel;
+
+            if (rage <= 0)
+            {
+                rageMode = false;
+                spriteRenderer.color = Color.white;
+                speed = 6;
+            }
+
+            if (rageMode) {
+                spriteRenderer.color = Color.red;
+                rage -= Time.deltaTime;
+                speed = 9;
+            }
+
         
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.CompareTag("Hazard") && !dead) Die();
+        if(other.gameObject.CompareTag("Hazard") && !dead && !rageMode) Die();
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+     
+        if (other.gameObject.CompareTag("Hazard") && !dead && !rageMode)
+        {
+            Die();
+        }
+
+
     }
 
     public void Die(){

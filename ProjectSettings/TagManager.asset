@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Hazard
   - Ricochet
+  - Dead
   layers:
   - Default
   - TransparentFX
