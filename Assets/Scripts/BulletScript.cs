@@ -46,8 +46,8 @@ public class BulletScript : MonoBehaviour
     
         if (other.gameObject.CompareTag("Bat"))
         {
-            xspeed *=-1;
-            yspeed *=-1;
+            xspeed *=-2;
+            yspeed *=-2;
             transform.gameObject.tag = "Ricochet";
         }
 

@@ -19,6 +19,8 @@ public class newEnemyScript : MonoBehaviour
     public GameObject player;
     public PlayerController playerScript;
 
+    public Collider2D Collider;
+
   
     public GameObject bullet;
     void Start()
@@ -94,9 +96,11 @@ public class newEnemyScript : MonoBehaviour
        if (other.gameObject.CompareTag("Bat"))
          {
             float sign = 1;
+            attack = false;
             BatScript batScript = other.gameObject.GetComponent<BatScript>();
             if(batScript.left) sign = -1;
             float force = batScript.swingForce * 0.3f;
+            Collider.isTrigger = true;
             RB.linearVelocity = new Vector2(Random.Range(force - 1.0f, force + 3.0f) * sign, Random.Range(force/2 - 3.0f, force/2 + 5.0f));
         }
 

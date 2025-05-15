@@ -20,18 +20,28 @@ public class BatScript : MonoBehaviour
     void Update()
     {
         if (player.RB.linearVelocity.x > 0) {
-        transform.position = new Vector2(playerObject.transform.position.x + 0.5f, transform.position.y);
+        transform.position = new Vector2(playerObject.transform.position.x + 1.5f, playerObject.transform.position.y);
         left = false;
         }
         if (player.RB.linearVelocity.x < 0) {
-        transform.position = new Vector2(playerObject.transform.position.x - 0.5f, transform.position.y);
+        transform.position = new Vector2(playerObject.transform.position.x - 1.5f, playerObject.transform.position.y);
         left = true;
         }
+
+        if(left){
+          transform.position = new Vector2(playerObject.transform.position.x - 1.5f, playerObject.transform.position.y);
+        } else transform.position = new Vector2(playerObject.transform.position.x + 1.5f, playerObject.transform.position.y);
+
+        
         if(swinging)
         {
             gameObject.GetComponent<Renderer>().enabled = true;
+            gameObject.GetComponent<BoxCollider2D>().enabled = true;
         }
-        else gameObject.GetComponent<Renderer>().enabled = false;
+        else {
+        gameObject.GetComponent<Renderer>().enabled = false;
+        gameObject.GetComponent<BoxCollider2D>().enabled = true;
+        }
 
         lastSwingTime-=Time.deltaTime;
         if (lastSwingTime <= 0 && swinging) {

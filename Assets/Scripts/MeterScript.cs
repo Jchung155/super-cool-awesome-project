@@ -13,7 +13,7 @@ public class MeterScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameObject.transform.position = new Vector2(player.transform.position.x, player.transform.position.y + 0.4f);
+        gameObject.transform.position = new Vector2(player.transform.position.x, player.transform.position.y + 0.8f);
         gameObject.transform.localScale = new Vector2(0.66f * playerScript.charge / playerScript.maxCharge, 0.15f);
     }
 }
