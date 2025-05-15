@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public float rage;
     public float maxRage;
     public int health;
+    public BatScript bat;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -53,20 +54,23 @@ public class PlayerController : MonoBehaviour
                 vel.y = jumpSpeed;
             }
 
-            if (Input.GetKey(KeyCode.A)) { 
+            if (Input.GetKey(KeyCode.A) && bat.lastSwingTime <= 0 && charge <= maxCharge) { 
         
             charge++;
                 
             } 
             
-            else if(charge > 10)
+            else if(charge > 120){
+            bat.Swing(charge);
+            charge = 0;
+            }
         {
 
             charge = 0;
         }
 
         RB.linearVelocity = vel;
-
+        
         }
     }
 

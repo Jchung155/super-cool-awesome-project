@@ -29,7 +29,7 @@ public class BulletScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //    transform.position = new Vector3(transform.position.x + xspeed, transform.position.y + yspeed, 0);
 
@@ -48,7 +48,7 @@ public class BulletScript : MonoBehaviour
         {
             xspeed *=-1;
             yspeed *=-1;
-            transform.gameObject.tag = "Redirected";
+            transform.gameObject.tag = "Ricochet";
         }
 
     }
