@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
         if (!dead) {
             vel = new Vector2(RB.linearVelocity.x, RB.linearVelocity.y);
 
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.RightArrow))
             {
                 vel.x = speed;
                 GetComponent<SpriteRenderer>().flipX = false;
@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
                 if (vel.x > drag) vel.x -= drag; else vel.x = 0;
             }
 
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.LeftArrow))
             {
                 vel.x = -speed;
                 GetComponent<SpriteRenderer>().flipX = true;
@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
                 vel.y = jumpSpeed;
             }
 
-            if (Input.GetKey(KeyCode.L)) { 
+            if (Input.GetKey(KeyCode.A)) { 
         
             charge++;
                 
